@@ -1,4 +1,5 @@
 # CNN-LSTM_for_AMT
+The code includes some .py files
 
 preprocessing.py serves to read music pieces for dataset and convert to spectrom and label files, save them
 
