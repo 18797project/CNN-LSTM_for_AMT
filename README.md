@@ -1,4 +1,7 @@
 # CNN-LSTM_for_AMT
+The Data folder in this project is not usable.
+For whole dataset, go to google drive link: 
+
 The code includes some .py files
 
 preprocessing.py serves to read music pieces for dataset and convert to spectrom and label files, save them
