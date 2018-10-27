@@ -1,11 +1,17 @@
 
+# coding: utf-8
 
-#conv.py
+# In[1]:
+
 
 import torch
 from torch import nn
 import math
 #from layers import *
+
+
+# In[2]:
+
 
 class Net(nn.Module):
     def __init__(self):
@@ -66,7 +72,7 @@ class Loss(nn.Module):
 
         loss = self.classify_loss(
            output,labels)
-        pos = (torch.sigmoid(output) >= 0.5).type(torch.cuda.FloatTensor)
+        pos = (torch.sigmoid(output) >= 0.5).type(torch.FloatTensor)
         pos_recall=labels.sum()
         pos_precision=pos.sum()
         TP=(pos*labels).sum()
@@ -78,5 +84,4 @@ def get_model():
     net = Net()
     loss = Loss()
     return net, loss
-
 

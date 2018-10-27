@@ -1,4 +1,9 @@
 
+# coding: utf-8
+
+# In[1]:
+
+
 # data_loader.py
 import math
 import numpy as np
@@ -6,15 +11,21 @@ import os,glob
 from torch.utils.data import Dataset
 import torch
 
+
+# In[2]:
+
+
 # win_width=100
 # kernel_size=7  #7*252=42**2=1764
 # data_dir= 'C:\proj18797\preprocessed_data'
 
 class data_loader(Dataset):
-    def __init__(self, data_dir, win_width, kernel_size,overlap=True,phase='train'):
+    def __init__(self, data_dir, win_width, kernel_size, overlap=True, phase='train'):
         assert (phase == 'train' or phase == 'val' or phase == 'test')
         self.phase = phase
         filelist= glob.glob(os.path.join(data_dir,phase)+'/*') #namelist of CQT files and label files
+        print(phase+'filelist:')
+        print(filelist)
         CQT_name=[f for f in filelist if (f[-7:-4]=='CQT')]
         self.input=[]
         self.nb_sample=[]
@@ -73,4 +84,5 @@ def LoadData_main(data_dir, win_width, kernel_size,overlap=True):
     valset=data_loader(data_dir,win_width,kernel_size,overlap=True,phase='val');
     testset=data_loader(data_dir,win_width,kernel_size,overlap=True,phase='test');
     print('all data and label loaded!')
-    return trainset,valset,testset   
+    return trainset,valset,testset
+
