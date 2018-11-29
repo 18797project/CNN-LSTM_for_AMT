@@ -335,7 +335,7 @@ class Loss(nn.Module):
     def forward(self, output, labels, train=True):
         loss = self.classify_loss(
            output,labels)
-        pos = (torch.sigmoid(output) >= 0.5).type(torch.FloatTensor)
+        pos = (torch.sigmoid(output) >= 0.5).type(torch.FloatTensor).cuda()
         pos_recall=labels.sum()
         pos_precision=pos.sum()
         TP=(pos*labels).sum()
