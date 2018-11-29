@@ -44,9 +44,9 @@ from torch.autograd import Variable
 import torch.cuda
 
 if torch.cuda.is_available():
-    display('cuda available')
+    print('cuda available')
 else:
-    display('cuda not available')
+    print('cuda not available')
 
 print(sr)
 
