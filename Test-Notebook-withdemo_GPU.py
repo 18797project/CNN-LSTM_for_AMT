@@ -451,7 +451,7 @@ def train(data_loader, net, loss, epoch, optimizer, get_lr, save_freq, save_dir,
         state_dict = net.module.state_dict()
         for key in state_dict.keys():
             state_dict[key] = state_dict[key].cpu()
-        display('model data moved to cpu')
+        print('model data moved to cpu')
 
         torch.save({
             'epoch': epoch,
