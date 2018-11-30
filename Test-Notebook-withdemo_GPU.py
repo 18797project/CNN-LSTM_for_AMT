@@ -369,7 +369,7 @@ loss = loss.cuda()
 # In[29]:
 
 
-data_dir='someprocesseddata'
+data_dir='someprocessed'
 dataset=data_loader(data_dir,win_width, kernel_size,overlap=True,phase='train')
 train_loader = DataLoader(
         dataset,
