@@ -59,8 +59,8 @@ import pretty_midi
 n_workers=10
 start_lr=0.01
 weight_decay=1e-4
-nb_epochs=50
-save_freq=1
+nb_epochs=30
+save_freq=5
 win_width=32  
 batch_size=32
 kernel_size=7
@@ -412,7 +412,7 @@ def get_lr(epoch,nb_epochs,start_lr):
 # In[8]:
 
 
-save_dir='save20181130'
+save_dir='save_training'
 if not osp.exists(save_dir): 
     os.makedirs(save_dir) 
 
@@ -439,29 +439,26 @@ def train(data_loader, net, loss, epoch, optimizer, get_lr, save_freq, save_dir,
         output = net(data)
         print("Output",output.shape,"Target",target.shape)
         loss_output = loss(output,target)#(8L, 88L, 32L, 1L)/(8L, 1L, 32L, 88L)
-        print(np.asarray(loss_output))
+        
 #         print (loss_output[0])
         loss_output[0].backward()
         optimizer.step()
 
         loss_output[0] = loss_output[0].item()
         metrics.append(loss_output)
-    
-    torch.save(net.state_dict(), os.path.join(save_dir, '%02d.pt' % epoch))
 
+    if epoch % save_freq == 0:
+        state_dict = net.module.state_dict()
+        for key in state_dict.keys():
+            state_dict[key] = state_dict[key].cpu()
+        print('model data moved to cpu')
 
-#     if epoch % save_freq == 0:
-#         state_dict = net.module.state_dict()
-#         for key in state_dict.keys():
-#             state_dict[key] = state_dict[key].cpu()
-#         print('model data moved to cpu')
-
-#         torch.save({
-#             'epoch': epoch,
-#             'save_dir': save_dir,
-#             'state_dict': state_dict
-#             },
-#             os.path.join(save_dir, '%03d.ckpt' % epoch))
+        torch.save({
+            'epoch': epoch,
+            'save_dir': save_dir,
+            'state_dict': state_dict
+            },
+            os.path.join(save_dir, '%03d.ckpt' % epoch))
         #torch.save(net,os.path.join(save_dir, '%03d.ckpt' % epoch)) #can also save trained model in this way
 
     end_time = time.time()
@@ -737,4 +734,3 @@ plt.show()
 #                              fmin=pretty_midi.note_number_to_hz(start_pitch))
 # plt.title('roll matrix after transcription', fontsize=10)
 # plt.show()
-
