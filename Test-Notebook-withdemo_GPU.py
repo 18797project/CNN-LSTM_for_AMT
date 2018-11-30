@@ -412,7 +412,7 @@ def get_lr(epoch,nb_epochs,start_lr):
 # In[8]:
 
 
-save_dir='save_training'
+save_dir='save20181130'
 if not osp.exists(save_dir): 
     os.makedirs(save_dir) 
 
