@@ -446,19 +446,22 @@ def train(data_loader, net, loss, epoch, optimizer, get_lr, save_freq, save_dir,
 
         loss_output[0] = loss_output[0].item()
         metrics.append(loss_output)
+    
+    torch.save(net.state_dict(), os.path.join(save_dir, '%02d.pt' % epoch))
 
-    if epoch % save_freq == 0:
-        state_dict = net.module.state_dict()
-        for key in state_dict.keys():
-            state_dict[key] = state_dict[key].cpu()
-        print('model data moved to cpu')
 
-        torch.save({
-            'epoch': epoch,
-            'save_dir': save_dir,
-            'state_dict': state_dict
-            },
-            os.path.join(save_dir, '%03d.ckpt' % epoch))
+#     if epoch % save_freq == 0:
+#         state_dict = net.module.state_dict()
+#         for key in state_dict.keys():
+#             state_dict[key] = state_dict[key].cpu()
+#         print('model data moved to cpu')
+
+#         torch.save({
+#             'epoch': epoch,
+#             'save_dir': save_dir,
+#             'state_dict': state_dict
+#             },
+#             os.path.join(save_dir, '%03d.ckpt' % epoch))
         #torch.save(net,os.path.join(save_dir, '%03d.ckpt' % epoch)) #can also save trained model in this way
 
     end_time = time.time()
