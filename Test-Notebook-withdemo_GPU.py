@@ -439,7 +439,7 @@ def train(data_loader, net, loss, epoch, optimizer, get_lr, save_freq, save_dir,
         output = net(data)
         print("Output",output.shape,"Target",target.shape)
         loss_output = loss(output,target)#(8L, 88L, 32L, 1L)/(8L, 1L, 32L, 88L)
-        
+        print(np.asarray(loss_output))
 #         print (loss_output[0])
         loss_output[0].backward()
         optimizer.step()
