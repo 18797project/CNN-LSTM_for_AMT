@@ -59,8 +59,8 @@ import pretty_midi
 n_workers=10
 start_lr=0.01
 weight_decay=1e-4
-nb_epochs=10
-save_freq=20
+nb_epochs=21
+save_freq=10
 win_width=32  
 batch_size=32
 kernel_size=7
@@ -302,7 +302,19 @@ class Net(nn.Module):
             nn.ELU(inplace=True),
             nn.Dropout3d(p=0.5, inplace=False))
         self.fc3 = nn.Linear(in_features=4800,  out_features=32*88)
-
+        self.conv3=nn.Sequential(
+            nn.Conv2d(50, 1000, kernel_size=(1,24)),   #kernel_size !!!!! conv_mode,padding=0 by default
+            #nn.ReLU(inplace=True),
+            nn.ELU(inplace=True),
+            nn.Dropout3d(p=0.5, inplace=False))
+        self.conv4 = nn.Sequential(
+            nn.Conv2d(1000, 500, kernel_size=1),  # kernel_size !!!!! conv_mode,padding=0 by default
+            nn.ELU(inplace=True),
+        #nn.ReLU(inplace=True),
+            nn.Dropout3d(p=0.5, inplace=False))
+        self.conv5=nn.Sequential(
+            nn.Conv2d(500, 88, kernel_size=1))#,
+            #nn.Sigmoid() 
 
     def forward(self, x):
 #         print("1.",x.shape)
@@ -316,14 +328,17 @@ class Net(nn.Module):
 #         print("5.",x.shape)
         x = x.view(-1, 38400)
 #         print("6.",x.shape)
-        x = self.fc1(x)
-#         print("7.",x.shape)
-        x = self.fc2(x)
-#         print("8.",x.shape)
-        x = self.fc3(x)
+#         x = self.fc1(x)
+# #         print("7.",x.shape)
+#         x = self.fc2(x)
+# #         print("8.",x.shape)
+#         x = self.fc3(x)
 #         print("9.",x.shape)
         x = x.view(-1, 88, 32, 1)
 #         print("10.",x.shape)
+        x = self.conv3(x)# (8L, 1000L, 32L, 1L)
+        x = self.conv4(x)#(8L, 500L, 32L, 1L)
+        x = self.conv5(x)#(8L, 88L, 32L, 1L)
         return x
 
 
