@@ -53,7 +53,7 @@ if torch.cuda.is_available():
 else:
     print('cuda not available')
 
-data_dir='someprocessed'
+data_dir='Newpreprocessed'
 
 save_dir='save1130'
 if not osp.exists(save_dir): 
@@ -63,8 +63,8 @@ if not osp.exists(save_dir):
 n_workers=10
 start_lr=0.01
 weight_decay=1e-4
-nb_epochs=31
-save_freq=15
+nb_epochs=50
+save_freq=30
 win_width=32  
 batch_size=32
 kernel_size=7
@@ -479,7 +479,7 @@ def train(data_loader, net, loss, epoch, optimizer, get_lr, save_freq, save_dir,
         loss_output[0] = loss_output[0].item()
         metrics.append(loss_output)
 
-    if epoch % 10 == 0:
+    if (epoch+1) % save_freq == 0:
         state_dict = net.module.state_dict()
         for key in state_dict.keys():
             state_dict[key] = state_dict[key].cpu()
