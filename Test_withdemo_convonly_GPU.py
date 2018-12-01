@@ -64,7 +64,7 @@ n_workers=10
 start_lr=0.01
 weight_decay=1e-4
 nb_epochs=50
-save_freq=30
+save_freq=44
 win_width=32  
 batch_size=32
 kernel_size=7
@@ -568,7 +568,6 @@ plt.plot(range(1,nb_epochs+1),show_train[:,1])
 plt.xlabel('epoch number')
 plt.ylabel('precision - train')
 plt.show()
-plt.savefig('precision - train.jpg')
 
 plt.plot(range(1,nb_epochs+1),show_train[:,2])
 plt.xlabel('epoch number')
