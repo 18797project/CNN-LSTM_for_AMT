@@ -422,7 +422,7 @@ def get_model():
 
 
 #paths and dir
-data_path='C:\\Users\\Li_Sh\\18797proj\\trymycode\\NewStart'
+data_path='NewStart'
 parent_dir=osp.dirname(osp.realpath(data_path))
 print('parent',parent_dir)
 save_path0=osp.join(parent_dir, 'Newpreprocessed')
