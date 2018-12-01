@@ -60,7 +60,7 @@ n_workers=10
 start_lr=0.01
 weight_decay=1e-4
 nb_epochs=30
-save_freq=5
+save_freq=20
 win_width=32  
 batch_size=32
 kernel_size=7
@@ -369,7 +369,7 @@ loss = loss.cuda()
 # In[29]:
 
 
-data_dir='someprocessed'
+data_dir='Newpreprocessed'
 dataset=data_loader(data_dir,win_width, kernel_size,overlap=True,phase='train')
 train_loader = DataLoader(
         dataset,
@@ -412,7 +412,7 @@ def get_lr(epoch,nb_epochs,start_lr):
 # In[8]:
 
 
-save_dir='save_training'
+save_dir='Newsavemodel'
 if not osp.exists(save_dir): 
     os.makedirs(save_dir) 
 
@@ -447,7 +447,7 @@ def train(data_loader, net, loss, epoch, optimizer, get_lr, save_freq, save_dir,
         loss_output[0] = loss_output[0].item()
         metrics.append(loss_output)
 
-    if epoch % save_freq == 0:
+    if epoch == save_freq:
         state_dict = net.module.state_dict()
         for key in state_dict.keys():
             state_dict[key] = state_dict[key].cpu()
