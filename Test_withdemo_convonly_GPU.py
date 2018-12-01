@@ -491,6 +491,7 @@ def train(data_loader, net, loss, epoch, optimizer, get_lr, save_freq, save_dir,
             },
             os.path.join(save_dir, '%03d.ckpt' % epoch))
 
+
     end_time = time.time()
     metrics = np.asarray(metrics, np.float32)
 
