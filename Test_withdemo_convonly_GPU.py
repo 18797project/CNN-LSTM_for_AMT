@@ -61,10 +61,10 @@ if not osp.exists(save_dir):
 
 
 n_workers=10
-start_lr=0.01
+start_lr=0.001
 weight_decay=1e-4
-nb_epochs=50
-save_freq=44
+nb_epochs=80
+save_freq=60
 win_width=32  
 batch_size=32
 kernel_size=7
@@ -437,10 +437,10 @@ optimizer = optim.Adam(
 
 
 def get_lr(epoch,nb_epochs,start_lr):
-    if epoch <= nb_epochs * 0.5:
+    if epoch <= nb_epochs * 0.8:
         lr = start_lr
-    elif epoch <= nb_epochs * 0.8:
-        lr = 0.1 * start_lr
+#     elif epoch <= nb_epochs * 0.8:
+#         lr = 0.1 * start_lr
     else:
         lr = 0.01 * start_lr
     return lr
