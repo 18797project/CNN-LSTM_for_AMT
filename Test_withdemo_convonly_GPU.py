@@ -64,7 +64,7 @@ n_workers=10
 start_lr=0.01
 weight_decay=1e-4
 nb_epochs=31
-save_freq=5
+save_freq=15
 win_width=32  
 batch_size=32
 kernel_size=7
@@ -468,7 +468,7 @@ def train(data_loader, net, loss, epoch, optimizer, get_lr, save_freq, save_dir,
         target = Variable(target).cuda()
 
         output = net(data)
-        print("Output",output.shape,"Target",target.shape)
+        #print("Output",output.shape,"Target",target.shape)
         loss_output = loss(output,target)#(8L, 88L, 32L, 1L)/(8L, 1L, 32L, 88L)
         
 #         print (loss_output[0])
