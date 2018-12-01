@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # coding: utf-8
 
 # https://musicinformationretrieval.com/stft.html
@@ -46,7 +46,7 @@ print(sr)
 #import midi_to_mat as mm
 import pretty_midi
 
-data_dir='preprocessed_data'
+data_dir='someprocessed'
 
 save_dir='save20181130'
 if not osp.exists(save_dir): 
@@ -460,7 +460,7 @@ def train(data_loader, net, loss, epoch, optimizer, get_lr, save_freq, save_dir,
         target = Variable(target)
 
         output = net(data)
-        #rint("Output",output.shape,"Target",target.shape)
+        print("Output",output.shape,"Target",target.shape)
         loss_output = loss(output,target)#(8L, 88L, 32L, 1L)/(8L, 1L, 32L, 88L)
         
 #         print (loss_output[0])
