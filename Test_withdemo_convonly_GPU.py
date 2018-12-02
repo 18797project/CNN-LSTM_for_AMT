@@ -63,8 +63,8 @@ if not osp.exists(save_dir):
 n_workers=10
 start_lr=0.001
 weight_decay=1e-4
-nb_epochs=80
-save_freq=60
+nb_epochs=50
+save_freq=45
 win_width=32  
 batch_size=32
 kernel_size=7
