@@ -430,7 +430,7 @@ val_loader = DataLoader(
 optimizer = optim.SGD(
         net.parameters(),
         start_lr,
-        momentu=0.9,
+        momentum=0.9,
         weight_decay = weight_decay)
 
 
