@@ -427,9 +427,10 @@ val_loader = DataLoader(
 # In[37]:
 
 
-optimizer = optim.Adam(
+optimizer = optim.SGD(
         net.parameters(),
         start_lr,
+        momentu=0.9,
         weight_decay = weight_decay)
 
 
@@ -437,10 +438,10 @@ optimizer = optim.Adam(
 
 
 def get_lr(epoch,nb_epochs,start_lr):
-    if epoch <= nb_epochs * 0.8:
+    if epoch <= nb_epochs * 0.5:
         lr = start_lr
-#     elif epoch <= nb_epochs * 0.8:
-#         lr = 0.1 * start_lr
+    elif epoch <= nb_epochs * 0.8:
+        lr = 0.1 * start_lr
     else:
         lr = 0.01 * start_lr
     return lr
